@@ -94,7 +94,7 @@ names(my.lst)
 
 #coercing data轉換資料
 
-#Practice 3.2
+#Practice 3.2----
 #The first element
 first <- data.frame(before_diet = c(104, 95, 87, 77, 112), 
                     after_diet = c(104, 95, 87, 77, 112))
@@ -112,7 +112,7 @@ str(second)
 
 # install.packages("ggplot2")
 # install.packages("pryr")
-#library(dplyr)
+require(dplyr)
 library(ggplot2)
 library(pryr)
 
@@ -181,14 +181,14 @@ p <- ggplot(heart_full,
   theme(legend.position="none", 
         axis.title.x=element_blank(),
         axis.text.x=element_blank(), 
-        axis.ticks.x=element_blank(),
         axis.title.y=element_blank(),
         axis.text.y=element_blank(), 
-        axis.ticks.y=element_blank(),
         axis.ticks = element_blank(),
-        panel.border = element_blank())+
+        panel.border = element_blank(),
+        plot.title = element_text(face = 'bold', size = 60, hjust = 0.5, vjust = -15))+
   scale_y_continuous(breaks = NULL) +
-  scale_x_continuous(breaks = NULL)
+  scale_x_continuous(breaks = NULL) +
+  ggtitle("I Love R")
 p
 
 

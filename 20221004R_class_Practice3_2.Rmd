@@ -1,5 +1,5 @@
 ---
-title: "2022.10.04_R_class_Practice3_2"
+title: "2022.10.04_R_class_Practice3.2"
 author: "Berrica"
 date: "2022-10-04"
 output: html_document
@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Practice3.2 in R class
+# Practice3.2 in R class
 
 
 ## The first element
@@ -29,7 +29,7 @@ mode(second)
 str(second)
 ```
 
-## The third element: How much I enjoy manipulating data in R!!!
+## The third element: How much I enjoy manipulating data in R ?
 ```{r, eval = T, echo = F}
 # install.packages("ggplot2")
 # install.packages("pryr")
@@ -99,19 +99,24 @@ p <- ggplot(heart_full,
   scale_color_gradient(limits = c(0, 1), low = "red3", high = "pink") + 
   scale_size(limits = c(0, 3), range = c(0.1, 20)) + 
   theme_bw() +
-  theme(legend.position="none", 
-        axis.title.x=element_blank(),
-        axis.text.x=element_blank(), 
-        axis.ticks.x=element_blank(),
-        axis.title.y=element_blank(),
-        axis.text.y=element_blank(), 
-        axis.ticks.y=element_blank(),
+  theme(legend.position = "none", 
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(), 
         axis.ticks = element_blank(),
-        panel.border = element_blank())+
+        panel.border = element_blank(),
+        plot.title = element_text(face = 'bold', size = 60, hjust = 0.5, vjust = -12))+
   scale_y_continuous(breaks = NULL) +
-  scale_x_continuous(breaks = NULL)
+  scale_x_continuous(breaks = NULL) +
+  ggtitle("I Love R")
 p
+
 ```
+
+### Manipulating data in R is quite interesting. When I am manipulating R, it is like **playing** R. Endless surprise will make you be crazy for it!
+### In R, there are a lot of different functions that can help me calculate and visualize data. In brief, it is really useful. Welcome to enjoy R with us! 
+
 
 ## Outcome
 ```{r, eval = T}
@@ -120,5 +125,3 @@ BUBBLE_DIET <- list(first, WEIGHT_LOSS = second, ILOVER = p)
 mode(BUBBLE_DIET)
 str(BUBBLE_DIET)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
