@@ -11,29 +11,63 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Practice3.2 in R class
 
+```{r, eval = T}
+#write the original dataframe
+subject <- paste('subject', '_', 1:5)
+bubble.tea <- data.frame(before_diet = c(104, 95, 87, 77, 112), 
+                         after_diet = c(96, 91, 81, 75, 118),
+                         row.names = subject)
+mode(bubble.tea)
+str(bubble.tea)
+bubble.tea
+```
 
 ## The first element
 ```{r, eval = T}
-first <- data.frame(before_diet = c(104, 95, 87, 77, 112), 
-                    after_diet = c(104, 95, 87, 77, 112))
+#The first element----
+#call pakages
+library(tidyr)
+library(dplyr)
+
+#reformat the last dataframe to obtain column 'weight' and column 'time'
+first <- bubble.tea %>% pivot_longer(cols = before_diet:after_diet, 
+                                     names_to = 'time', 
+                                     values_to = 'weight')
 mode(first)
 str(first)
+first
 ```
 
 ## The second element
 ```{r, eval = T}
 
-second <- data.frame(subject = c(row.names(first)), 
-                     weight_loss = (first$before_diet - first$after_diet)/100)
-mode(second)
-str(second)
+#[1]the row names of the table previously created
+rn <- row.names(bubble.tea) #it is a vector of character
+mode(rn)
+rn
+
+#[2]indicate the weight loss (in %) of each subject 
+weight_loss <- (bubble.tea$before_diet - bubble.tea$after_diet)/100 #it's a numeric vector (double)
+mode(weight_loss)
+typeof(weight_loss)
+weight_loss
+
+#[3]combine these two elements in a table with two columns: subject and weight_loss
+combine <- data.frame(subject = rn,
+                      weight_loss = weight_loss)
+mode(combine)
+str(combine)
+combine
+
+WEIGHT_LOSS <- list(rn, weight_loss, combine)
+WEIGHT_LOSS
 ```
 
 ## The third element: How much I enjoy manipulating data in R ?
 ```{r, eval = T, echo = F}
 # install.packages("ggplot2")
 # install.packages("pryr")
-library(dplyr)
+
 library(ggplot2)
 library(pryr)
 
@@ -121,7 +155,7 @@ p
 ## Outcome
 ```{r, eval = T}
 #Make a list called BUBBLE_DIET
-BUBBLE_DIET <- list(first, WEIGHT_LOSS = second, ILOVER = p)
+BUBBLE_DIET <- list(first, WEIGHT_LOSS, ILOVER = p)
 mode(BUBBLE_DIET)
 str(BUBBLE_DIET)
 ```

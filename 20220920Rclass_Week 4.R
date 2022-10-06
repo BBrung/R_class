@@ -95,24 +95,51 @@ names(my.lst)
 #coercing data轉換資料
 
 #Practice 3.2----
-#The first element
-first <- data.frame(before_diet = c(104, 95, 87, 77, 112), 
-                    after_diet = c(104, 95, 87, 77, 112))
+
+#write the original dataframe
+subject <- paste('subject', '_', 1:5)
+bubble.tea <- data.frame(before_diet = c(104, 95, 87, 77, 112), 
+                         after_diet = c(96, 91, 81, 75, 118),
+                         row.names = subject)
+mode(bubble.tea)
+str(bubble.tea)
+
+#The first element----
+#call pakages
+library(tidyr)
+library(dplyr)
+
+#reformat the last dataframe to obtain column 'weight' and column 'time'
+first <- bubble.tea %>% pivot_longer(cols = before_diet:after_diet, 
+                                     names_to = 'time', 
+                                     values_to = 'weight')
 mode(first)
 str(first)
 
-#The second element
-second <- data.frame(subject = c(row.names(first)), 
-                     weight_loss = (first$before_diet - first$after_diet)/100)
-mode(second)
-str(second)
 
+#The second element----
+#[1]the row names of the table previously created
+rn <- row.names(bubble.tea) #it is a vector of character
+mode(rn)
+
+#[2]indicate the weight loss (in %) of each subject 
+weight_loss <- (bubble.tea$before_diet - bubble.tea$after_diet)/100 #it's a numeric vector (double)
+mode(weight_loss)
+typeof(weight_loss)
+
+#[3]combine these two elements in a table with two columns: subject and weight_loss
+combine <- data.frame(subject = rn,
+                      weight_loss = weight_loss)
+mode(combine)
+str(combine)
+
+WEIGHT_LOSS <- list(rn, weight_loss, combine)
 
 #The third element----
 
 # install.packages("ggplot2")
 # install.packages("pryr")
-require(dplyr)
+
 library(ggplot2)
 library(pryr)
 
@@ -194,7 +221,7 @@ p
 
 
 #Make a list called BUBBLE_DIET
-BUBBLE_DIET <- list(first, WEIGHT_LOSS = second, ILOVER = p)
+BUBBLE_DIET <- list(first, WEIGHT_LOSS, ILOVER = p)
 mode(BUBBLE_DIET)
 str(BUBBLE_DIET)
 
