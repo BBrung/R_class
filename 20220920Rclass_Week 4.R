@@ -123,7 +123,7 @@ rn <- row.names(bubble.tea) #it is a vector of character
 mode(rn)
 
 #[2]indicate the weight loss (in %) of each subject 
-weight_loss <- (bubble.tea$before_diet - bubble.tea$after_diet)/100 #it's a numeric vector (double)
+weight_loss <- (bubble.tea$before_diet - bubble.tea$after_diet)/bubble.tea$before_diet*100 #it's a numeric vector (double)
 mode(weight_loss)
 typeof(weight_loss)
 

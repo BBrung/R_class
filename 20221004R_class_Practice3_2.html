@@ -438,13 +438,13 @@ mode(rn)</code></pre>
 <pre class="r"><code>rn</code></pre>
 <pre><code>## [1] &quot;subject _ 1&quot; &quot;subject _ 2&quot; &quot;subject _ 3&quot; &quot;subject _ 4&quot; &quot;subject _ 5&quot;</code></pre>
 <pre class="r"><code>#[2]indicate the weight loss (in %) of each subject 
-weight_loss &lt;- (bubble.tea$before_diet - bubble.tea$after_diet)/100 #it&#39;s a numeric vector (double)
+weight_loss &lt;- (bubble.tea$before_diet - bubble.tea$after_diet)/bubble.tea$before_diet*100 #it&#39;s a numeric vector (double)
 mode(weight_loss)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <pre class="r"><code>typeof(weight_loss)</code></pre>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <pre class="r"><code>weight_loss</code></pre>
-<pre><code>## [1]  0.08  0.04  0.06  0.02 -0.06</code></pre>
+<pre><code>## [1]  7.692308  4.210526  6.896552  2.597403 -5.357143</code></pre>
 <pre class="r"><code>#[3]combine these two elements in a table with two columns: subject and weight_loss
 combine &lt;- data.frame(subject = rn,
                       weight_loss = weight_loss)
@@ -453,29 +453,29 @@ mode(combine)</code></pre>
 <pre class="r"><code>str(combine)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    5 obs. of  2 variables:
 ##  $ subject    : chr  &quot;subject _ 1&quot; &quot;subject _ 2&quot; &quot;subject _ 3&quot; &quot;subject _ 4&quot; ...
-##  $ weight_loss: num  0.08 0.04 0.06 0.02 -0.06</code></pre>
+##  $ weight_loss: num  7.69 4.21 6.9 2.6 -5.36</code></pre>
 <pre class="r"><code>combine</code></pre>
 <pre><code>##       subject weight_loss
-## 1 subject _ 1        0.08
-## 2 subject _ 2        0.04
-## 3 subject _ 3        0.06
-## 4 subject _ 4        0.02
-## 5 subject _ 5       -0.06</code></pre>
+## 1 subject _ 1    7.692308
+## 2 subject _ 2    4.210526
+## 3 subject _ 3    6.896552
+## 4 subject _ 4    2.597403
+## 5 subject _ 5   -5.357143</code></pre>
 <pre class="r"><code>WEIGHT_LOSS &lt;- list(rn, weight_loss, combine)
 WEIGHT_LOSS</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;subject _ 1&quot; &quot;subject _ 2&quot; &quot;subject _ 3&quot; &quot;subject _ 4&quot; &quot;subject _ 5&quot;
 ## 
 ## [[2]]
-## [1]  0.08  0.04  0.06  0.02 -0.06
+## [1]  7.692308  4.210526  6.896552  2.597403 -5.357143
 ## 
 ## [[3]]
 ##       subject weight_loss
-## 1 subject _ 1        0.08
-## 2 subject _ 2        0.04
-## 3 subject _ 3        0.06
-## 4 subject _ 4        0.02
-## 5 subject _ 5       -0.06</code></pre>
+## 1 subject _ 1    7.692308
+## 2 subject _ 2    4.210526
+## 3 subject _ 3    6.896552
+## 4 subject _ 4    2.597403
+## 5 subject _ 5   -5.357143</code></pre>
 </div>
 <div id="the-third-element-how-much-i-enjoy-manipulating-data-in-r" class="section level2">
 <h2>The third element: How much I enjoy manipulating data in R ?</h2>
@@ -504,10 +504,10 @@ mode(BUBBLE_DIET)</code></pre>
 ##   ..$ weight: num [1:10] 104 96 95 91 87 81 77 75 112 118
 ##  $       :List of 3
 ##   ..$ : chr [1:5] &quot;subject _ 1&quot; &quot;subject _ 2&quot; &quot;subject _ 3&quot; &quot;subject _ 4&quot; ...
-##   ..$ : num [1:5] 0.08 0.04 0.06 0.02 -0.06
+##   ..$ : num [1:5] 7.69 4.21 6.9 2.6 -5.36
 ##   ..$ :&#39;data.frame&#39;: 5 obs. of  2 variables:
 ##   .. ..$ subject    : chr [1:5] &quot;subject _ 1&quot; &quot;subject _ 2&quot; &quot;subject _ 3&quot; &quot;subject _ 4&quot; ...
-##   .. ..$ weight_loss: num [1:5] 0.08 0.04 0.06 0.02 -0.06
+##   .. ..$ weight_loss: num [1:5] 7.69 4.21 6.9 2.6 -5.36
 ##  $ ILOVER:List of 9
 ##   ..$ data       :&#39;data.frame&#39;:  2563 obs. of  5 variables:
 ##   .. ..$ x    : num [1:2563] 0.962 0.554 -0.043 -0.997 -0.505 ...
