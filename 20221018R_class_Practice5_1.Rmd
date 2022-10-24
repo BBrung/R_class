@@ -1,0 +1,51 @@
+---
+title: "2022.10.18_Rclass_Practice5.1"
+author: "Berrica"
+date: "2022-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Interactive Map
+Originally, I want to make a map containing both global coral distribution and diving sites to see the relationship between them.
+However, it is difficult to find free GPS or GIS data of global coral distribution and diving sites.
+Therefore, I found the data from Florida instead of global data.
+I marked the location of my house to see how these diving site is far from my house.
+```{r}
+#Load packages
+library(leaflet)
+library(rgbif)
+library(tidyverse)
+library(readxl)
+#Read data from Florida
+data <- read_xlsx('Data/diving_site.xlsx')
+
+#Make icon to mark my house: diver icon
+diver.icon <- makeIcon(
+  iconUrl = "https://cdn2.iconfinder.com/data/icons/sport-ii/100/24-512.png",
+  iconWidth = 18, iconHeight = 20)
+
+#Make different icon for wreck diving and reef diving
+icons <- iconList(Wreck = makeIcon('https://www.freeiconspng.com/thumbs/shipping-icon/-nautical-raw-ship-shipping-simple-yacht-icon--icon-search-engine-3.png', iconWidth = 18, iconHeight =15),
+                  Reef = makeIcon('https://cdn-icons-png.flaticon.com/512/202/202206.png', iconWidth = 18, iconHeight =18)) #iconList can be used to designed different size of icon
+
+#Draw Map
+M <- leaflet() %>% 
+  addTiles() %>% setView(30.664237, 24.258327, zoom = 1) %>%   #set the beginning map center 
+  addMarkers(lng=120.664237, lat = 24.258327, popup= "My sweet home", icon =  diver.icon) %>%  #mark my house with diver icon
+  addMarkers(~Lon, ~Lat, data = data, icon = icons)  #mark different types of diving with corresponding icons
+```
+
+## Welcome to Florida! Enjoy the underwater world here!
+
+If you want to go reef diving, check the location of those coral icons on the map!
+If you want to go wreck diving, check the location of those icons on the map!
+
+```{r pressure, echo=FALSE}
+M
+```
+
+
