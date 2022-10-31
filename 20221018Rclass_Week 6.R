@@ -301,19 +301,24 @@ taiwan <- readOGR('Data/COUNTY_MOI_1090820.shp', use_iconv=TRUE, encoding='UTF-8
 
 #What kind of MAP do you want to make?
 #coral distribution & diving spot
+
 #Load packages
 library(leaflet)
 library(rgbif)
 library(tidyverse)
 library(readxl)
+
 #Read data from Florida
 data <- read_xlsx('Data/diving_site.xlsx')
+
 #data sources: https://www.scubadiversworld.com/sites.html
 
 #Make icon to mark my house: diver icon
+
 diver.icon <- makeIcon(
   iconUrl = "https://cdn2.iconfinder.com/data/icons/sport-ii/100/24-512.png",
   iconWidth = 18, iconHeight = 20)
+
 
 #Make different icon for wreck diving and reef diving
 icons <- iconList(Wreck = makeIcon('https://www.freeiconspng.com/thumbs/shipping-icon/-nautical-raw-ship-shipping-simple-yacht-icon--icon-search-engine-3.png', iconWidth = 18, iconHeight =15),
@@ -324,7 +329,12 @@ M <- leaflet() %>%
   addTiles() %>% setView(30.664237, 24.258327, zoom = 1) %>%   #set the beginning map center 
   addMarkers(lng=120.664237, lat = 24.258327, popup= "My sweet home", icon =  diver.icon) %>%  #mark my house with diver icon
   addMarkers(~Lon, ~Lat, data = data, icon = icons)  #mark different types of diving with corresponding icons
+M
+
 #coral icon: https://cdn-icons-png.flaticon.com/512/202/202206.png
 #wreck icon: https://toppng.com/uploads/preview/home-home-sea-container-ship-icon-11563195830cq8dtw2n3l.png
 
-
+#try with shp_world coral distribution
+library(rgdal)
+world.coral <- readOGR('Data/WCMC008_CoralReefs2018_v4_1/WCMC008_CoralReef2018_Pt_v4_1.shp', 
+                       use_iconv=TRUE, encoding='UTF-8')
