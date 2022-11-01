@@ -104,7 +104,7 @@ saveGIF({
 ?saveGIF()
 
 
-
+#show gif on markdown
 #install.packages('gifski')
 #![](C:\Users\user\Downloads\R_class.gif)
 
