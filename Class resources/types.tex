@@ -1,0 +1,1203 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Data types and structures},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Data types and structures}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+Previously, we used \texttt{str} to inform on the \textbf{structure} of
+an object. Knowing the type and the structure of the data you are
+manipulating is critical before any further analysis. Yet, this step is
+often skipped whch may cause serious issue in subsequent steps. Probably
+boring and for sure lenghty, this section introduces some common data
+type and structure of data often met during this class.
+
+\hypertarget{core-data-types}{%
+\section{Core data types}\label{core-data-types}}
+
+These data types, or \textbf{modes}, define how the values are stored in
+the computer. You can get an object's mode using the \texttt{typeof}
+function. Note that R also has a built-in \texttt{mode} function that
+will serve the same purpose with the one exception in that it will not
+distinguish \textbf{integers} from \textbf{doubles} (see meanings
+below).
+
+\hypertarget{numeric}{%
+\subsection{Numeric}\label{numeric}}
+
+The \textbf{numeric} data type is probably the simplest. It consists of
+numbers such as \textbf{integers} (whole-valued positive or negative
+number or 0, e.g.~1 ,-3 ,33 ,0) or \textbf{doubles} (e.g.~0.3, 12.4,
+-0.04, 1.0). For example, to create a numeric (double) vector we can
+write:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.0}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{3.4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{140.1}\NormalTok{) }\CommentTok{\# numeric and double}
+\FunctionTok{typeof}\NormalTok{(x) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mode}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+Note that removing the fraction part of a number when creating a numeric
+object does not necessarily create an integer. For example, creating
+what seems to be an integer object returns double using \texttt{typeof}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{4}
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+To force R to recognize a value as an integer add an upper case
+\texttt{L} to the number.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ 4L}
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\hypertarget{character}{%
+\subsection{Character}\label{character}}
+
+The \textbf{character} data type consists of letters or words such as
+``a'', ``f'', ``project'', ``house value''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"bubul"}\NormalTok{, }\StringTok{"magpie"}\NormalTok{, }\StringTok{"spoonbill"}\NormalTok{, }\StringTok{"barbet"}\NormalTok{)}
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+Characters can also consist of numbers represented as characters. The
+distinction between a character representation of a number and a numeric
+one is important. For example, if we have two numeric vectors \texttt{x}
+and \texttt{y} such as
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{3}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FloatTok{5.3}
+\NormalTok{x }\SpecialCharTok{+}\NormalTok{ y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.3
+\end{verbatim}
+
+If we repeat these steps but instead of representing \texttt{x} and
+\texttt{y} as \textbf{numeric} and \textbf{doubles} we input `3' and
+`5.3' as \textbf{character}. We will logically get an error when
+attempting to sum them:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \StringTok{"3"}
+\NormalTok{y }\OtherTok{\textless{}{-}} \StringTok{"5.3"}
+
+\CommentTok{\# not run:  x+ y}
+
+\DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Error in x + y: non{-}numeric argument to binary operator \#}
+\DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\end{Highlighting}
+\end{Shaded}
+
+Note the use of quotation marks to force \textbf{double} to be
+recognized as \textbf{character}. Be careful some function such as
+\texttt{plot} will automatically convert your \textbf{character} as
+\textbf{double}, try \texttt{plot(x,y)}
+
+\hypertarget{logical}{%
+\subsection{Logical}\label{logical}}
+
+Logical values can take one of two values/conditions: \texttt{TRUE} or
+\texttt{FALSE}. These can also be represented as \texttt{1} or
+\texttt{0}, later assigned as \textbf{logical} values. For example, to
+create a logical vector of 4 elements, you can type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{as.logical}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\CommentTok{\# OR: x3 \textless{}{-} as.logical(c(1,0,0,1))}
+\end{Highlighting}
+\end{Shaded}
+
+Note that in both cases, \texttt{typeof} returns \textbf{logical}. Also
+note that the \texttt{1}'s and \texttt{0}'s in the last example are
+converted to \texttt{TRUE}'s and \texttt{FALSE}'s internally using the
+function \texttt{as.logical} (= create a logical vector).
+
+\hypertarget{derived-data-types}{%
+\section{Derived data types}\label{derived-data-types}}
+
+These data types are stored as either numeric, character or logical but
+have an additional \emph{attribute} information that allows these
+objects to be treated in special ways by certain functions. These
+attributes define an object's \textbf{class} and can be extracted from
+an object using the function \texttt{class}.
+
+\hypertarget{factor}{%
+\subsection{Factor}\label{factor}}
+
+\textbf{Factor} is used to group variables into a fixed number of unique
+categories or \textbf{levels}. For example, a data set may be grouped by
+\emph{gender} or \emph{month} of the year. Such data are usually loaded
+into R as a \textbf{numeric} or \textbf{character} data type, requiring
+then to be converted as a factor using the \texttt{as.factor} function
+(if it was not automatically done at the importation of the data).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"U"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"U"}\NormalTok{)}
+\FunctionTok{typeof}\NormalTok{(a) }\CommentTok{\# mode character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(a)}\CommentTok{\# class character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a.fact }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(a)}
+\FunctionTok{class}\NormalTok{(a.fact)}\CommentTok{\# class factor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\textbf{Note}: \texttt{a} did not change of mode. Data are still of the
+type \texttt{character}.
+
+However, the derived object \texttt{a.fact} is now stored as an
+\texttt{integer}!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mode}\NormalTok{(a.fact)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(a.fact)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+Yet, when displaying the contents of \texttt{a.fact} we see character
+values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a.fact}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] M F F U F M M M F U
+## Levels: F M U
+\end{verbatim}
+
+\textbf{為什麼}, how can it be ? Well, \texttt{a.fact} is a more
+complicated object than the simple objects created so far. In fact, the
+\textbf{factor} is storing additional information not seen in its
+output. This hidden information is stored in \textbf{attributes}. To
+view these hidden attributes, use the \texttt{attributes} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{attributes}\NormalTok{(a.fact)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $levels
+## [1] "F" "M" "U"
+## 
+## $class
+## [1] "factor"
+\end{verbatim}
+
+There are two attributes: \texttt{levels} and \texttt{class}. The levels
+attribute lists the three unique values in \texttt{a.fact}. The order in
+which these levels are listed reflect their \emph{numeric}
+representation {[}check \texttt{str\ (a.fact)} and numeric sequence
+created: \texttt{2\ 1\ 1\ 3\ ...}{]}. So in essence, \texttt{a.fact} is
+storing each value as an integer that points to one of the three unique
+levels. The unique levels of a factor, and the order in which they are
+stored can be extracted using the \texttt{levels} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(a.fact)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "F" "M" "U"
+\end{verbatim}
+
+Remember, the order in which the levels are displayed match their
+integer representation. If we want them in a different order (i.e.~U
+first followed by F then M) we need to modify them by recreating the
+factor object as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{factor}\NormalTok{(a, }\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"U"}\NormalTok{,}\StringTok{"F"}\NormalTok{,}\StringTok{"M"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] M F F U F M M M F U
+## Levels: U F M
+\end{verbatim}
+
+This detail is critically important when you are trying to rearrange
+elements in a plot, so yu have to remember it.
+
+\textbf{Practice 3.1} Understanding the factors and their levels is
+critical, especially when you subset or make plots. Let's explore
+together why using our \texttt{iris} data set. Subset species
+\texttt{setosa} and \texttt{virginica} into an new data set
+\texttt{iris.sel}. Check the \texttt{levels} in the variable
+\texttt{iris.sel\$Species}. Conclude on the possible consequence?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris.sel}\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(iris, Species }\SpecialCharTok{==} \StringTok{"setosa"} \SpecialCharTok{|}\NormalTok{ Species }\SpecialCharTok{==} \StringTok{"virginica"}\NormalTok{)}
+\FunctionTok{levels}\NormalTok{(iris.sel}\SpecialCharTok{$}\NormalTok{Species)  }\CommentTok{\# 3 species are still there}
+\CommentTok{\# boxplot(Petal.Width \textasciitilde{} Species, iris.sel, horizontal = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+To drop a level after a subset, you can use the function
+\texttt{droplevels} on a targeted variable. Try it on the variable
+\texttt{iris.sel\$Species} and check the previous plot.
+
+It is now time to change the row names in our subset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rownames}\NormalTok{(iris.sel) }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\AttributeTok{length=}\FunctionTok{nrow}\NormalTok{(iris.sel))}
+\end{Highlighting}
+\end{Shaded}
+
+{\textbf{ALWAYS}, \textbf{ALWAYS}, CHECK THE DATA TYPE AND STRUCTURE OF
+YOUR DATA SET!}
+
+\hypertarget{date}{%
+\subsection{Date}\label{date}}
+
+Date values are stored as numbers. But to be properly interpreted as a
+date object in R, their attribute must be explicitly defined as a
+\textbf{date}. \texttt{base} provides many facilities to convert and
+manipulate dates and times, but a package called \texttt{lubridate}
+{[}see \texttt{library\ (lubridate)}{]} makes working with dates/times
+much easier. Working with dates could be the object of a specific topic,
+and it will no be covered here.
+
+\hypertarget{nas-and-nulls}{%
+\subsection{NAs and NULLs}\label{nas-and-nulls}}
+
+Often you will find missing or unknown values in data set.It may be
+tempting to assign these missing or unknown values to \textbf{0}.
+However, doing so can be very wrong and can lead to many undesirable
+results when analyzing the data. R has two placeholders for such
+elements: \texttt{NA} and \texttt{NULL}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{NA} (Not Available) is a missing value indicator. It suggests
+that a value should be present but is unknown.
+
+The \texttt{NULL} object also represents missing values but its
+interpretation is slightly different in that it suggests that the value
+does not exist or that it's not measurable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\ConstantTok{NULL}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The difference between \texttt{NA} and \texttt{NULL} may seem subtle,
+but their interpretation in some functions can lead to different
+outcomes. For example, when computing the mean of \texttt{x}, R returns
+an \texttt{NA} value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+This serves as a check to remind the user that one of the elements is
+missing. This can be overcome by setting the \texttt{na.rm} parameter to
+\texttt{TRUE} as in \texttt{mean(x,\ na.rm=T)} in which case R ignores
+the missing value.
+
+A \texttt{NULL} object, on the other hand, is treated differently. Since
+\texttt{NULL} implies that a value should not be present, R no longer
+feels the need to treat such element as questionable and allows the mean
+value to be computed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.733333
+\end{verbatim}
+
+It's more common to find data tables with missing elements populated
+with \texttt{NA}'s than \texttt{NULL}'s so unless you have a specific
+reason to use \texttt{NULL} as a missing value placeholder, use
+\texttt{NA} instead.
+
+\hypertarget{data-structures}{%
+\section{Data structures}\label{data-structures}}
+
+Most data sets we work with consist of batches of values such as a
+\textbf{table} (ex: temperature values) or a list of results (ex: annual
+survey). These batches of data are stored in R in one of several data
+structures. These include \textbf{(atomic) vector}, \textbf{dataframe},
+\textbf{matrix} and \textbf{lists}.
+
+\includegraphics{images/data_structures.png}
+
+\hypertarget{atomic-vectors}{%
+\subsection{(Atomic) vectors}\label{atomic-vectors}}
+
+The \textbf{atomic vector} (or \textbf{vector} for short) is the
+simplest data structure in R which consists of an ordered set of values
+of the same type and or class (e.g.~numeric, character, date,
+etc\ldots). As we did it before, a vector can be sinply created using
+the combine function \texttt{c()} as in:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{674}\NormalTok{ , }\DecValTok{4186}\NormalTok{ , }\DecValTok{5308}\NormalTok{ , }\DecValTok{5083}\NormalTok{ , }\DecValTok{6140}\NormalTok{ , }\DecValTok{6381}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  674 4186 5308 5083 6140 6381
+\end{verbatim}
+
+As we seen before, a vector object is an \textbf{indexable} collection
+of values which allows one to access a specific index number
+(subscript). Remimber to access the third element of \texttt{x}, type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5308
+\end{verbatim}
+
+Also already seen it before, but you can select a subset of elements by
+index values using the combine function \texttt{c()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  674 5308 5083
+\end{verbatim}
+
+Or, if you are interested in a range of indexed values such as index 2
+through 4, use the : operator.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4186 5308 5083
+\end{verbatim}
+
+You can also assign new values to a specific index. For example, we can
+replace the second value in vector \texttt{x} with \texttt{0}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  674    0 5308 5083 6140 6381
+\end{verbatim}
+
+Note that a vector can store any data type such as characters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"all"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"olive"}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "all"   "b"     "olive"
+\end{verbatim}
+
+However, \textbf{a vector can only be of one type}. For example, you
+cannot mix numeric and character types as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{( }\FloatTok{1.2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\StringTok{"Rt"}\NormalTok{, }\StringTok{"2000"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In such a situation, R will convert the element types to the
+\textbf{highest common mode} following the order \textbf{NULL}
+\textless{} \textbf{logical} \textless{} \textbf{integer} \textless{}
+\textbf{double} \textless{} \textbf{character}. In our working example,
+the elements are coerced to character:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\hypertarget{matrices-and-arrays}{%
+\subsection{Matrices and arrays}\label{matrices-and-arrays}}
+
+Matrices in R can be thought of as vectors indexed using two indices
+instead of one. For example, the following line of code creates a 3 by 3
+matrix of randomly generated values. The parameters \texttt{nrow} and
+\texttt{ncol} define the matrix dimension and the function
+\texttt{runif} generates nine random numbers that populate this matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]     [,2]     [,3]
+## [1,] 7.1490526 7.006064 1.164323
+## [2,] 0.2242051 1.828834 1.821594
+## [3,] 1.9910141 3.888877 1.456992
+\end{verbatim}
+
+If a higher dimension vector is desired, then use the \texttt{array}
+function to generate the n-dimensional object. A 3x3x3 array can be
+created as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{27}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## , , 1
+## 
+##          [,1]     [,2]     [,3]
+## [1,] 7.689793 2.169378 3.802416
+## [2,] 6.477589 3.569118 1.805694
+## [3,] 6.151268 7.848788 7.600159
+## 
+## , , 2
+## 
+##          [,1]      [,2]     [,3]
+## [1,] 1.806448 6.0526779 9.050012
+## [2,] 5.511161 0.1921156 7.506409
+## [3,] 3.695768 1.2113127 4.415882
+## 
+## , , 3
+## 
+##          [,1]     [,2]     [,3]
+## [1,] 2.237368 5.716971 4.988455
+## [2,] 3.655112 9.028844 5.475451
+## [3,] 8.714372 3.485781 4.722434
+\end{verbatim}
+
+Matrices and arrays can store numeric or character data types, but they
+cannot store both. They derived directly form vector structure but have
+a higher number of dimensions.
+
+\hypertarget{data-frames}{%
+\subsection{Data frames}\label{data-frames}}
+
+A \textbf{data frame} is what comes closest to our perception of a data
+table. It's an extension of the matrix object in that, unlike a matrix,
+a data frame can \emph{mix} data types across columns (e.g.~both
+\textbf{numeric} and \textbf{character} columns can coexist in a data
+frame) but data type remains the same across rows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name   }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a1"}\NormalTok{, }\StringTok{"a2"}\NormalTok{, }\StringTok{"b3"}\NormalTok{)}
+\NormalTok{value1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{value2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{dat    }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(name, value1, value2)}
+\NormalTok{dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   name value1 value2
+## 1   a1     23      1
+## 2   a2      4     45
+## 3   b3     12      5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dat) }\CommentTok{\# provide structure}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    3 obs. of  3 variables:
+##  $ name  : chr  "a1" "a2" "b3"
+##  $ value1: num  23 4 12
+##  $ value2: num  1 45 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{attributes}\NormalTok{(dat) }\CommentTok{\# provide attributes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $names
+## [1] "name"   "value1" "value2"
+## 
+## $class
+## [1] "data.frame"
+## 
+## $row.names
+## [1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(dat) }\CommentTok{\# extract colum names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "name"   "value1" "value2"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rownames}\NormalTok{(dat) }\CommentTok{\# extract row names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1" "2" "3"
+\end{verbatim}
+
+\hypertarget{lists}{%
+\subsection{Lists}\label{lists}}
+
+A \textbf{list} is an ordered set of components stored in a 1D vector.
+In fact, it's another kind of vector called a \textbf{recursive vector}
+where each vector element can be of different data type and structure.
+This implies that \textbf{each element of a list} can hold complex
+objects such as \textbf{matrix}, \textbf{dataframe} and even in some
+cases other \textbf{list} objects imbricated within the \textbf{lis}!
+Think of a list as a single column spreadsheet where each cell stores
+anything from a single number to a three paragraph sentence or even
+another five column table.
+
+A list is constructed using the \texttt{list} function. For example, the
+following list consists of 3 components: a two-column data frame (tagged
+as component \texttt{A}), a two element logical vector (tagged as
+component \texttt{B}) and a three element character vector (tagged as
+component \texttt{C}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+     \AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{, }\FloatTok{29.4}\NormalTok{, }\FloatTok{29.4}\NormalTok{, }\FloatTok{2.9}\NormalTok{, }\FloatTok{12.3}\NormalTok{, }\FloatTok{7.5}\NormalTok{, }\FloatTok{36.0}\NormalTok{, }\FloatTok{4.8}\NormalTok{, }\FloatTok{18.8}\NormalTok{, }\FloatTok{4.2}\NormalTok{),}
+     \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\FloatTok{5.2}\NormalTok{, }\FloatTok{26.6}\NormalTok{, }\FloatTok{31.2}\NormalTok{, }\FloatTok{2.2}\NormalTok{, }\FloatTok{13.8}\NormalTok{, }\FloatTok{7.8}\NormalTok{, }\FloatTok{35.2}\NormalTok{, }\FloatTok{8.6}\NormalTok{, }\FloatTok{20.3}\NormalTok{, }\FloatTok{1.1}\NormalTok{) )}
+\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"apples"}\NormalTok{, }\StringTok{"oranges"}\NormalTok{, }\StringTok{"round"}\NormalTok{)}
+\NormalTok{my.lst }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{A =}\NormalTok{ A, }\AttributeTok{B =}\NormalTok{ B, }\AttributeTok{C =}\NormalTok{ C)}
+\end{Highlighting}
+\end{Shaded}
+
+You can view each component's structure using the \texttt{str} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(my.lst)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 3
+##  $ A:'data.frame':   10 obs. of  2 variables:
+##   ..$ x: num [1:10] 7.3 29.4 29.4 2.9 12.3 7.5 36 4.8 18.8 4.2
+##   ..$ y: num [1:10] 5.2 26.6 31.2 2.2 13.8 7.8 35.2 8.6 20.3 1.1
+##  $ B: logi [1:2] TRUE FALSE
+##  $ C: chr [1:3] "apples" "oranges" "round"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(my.lst)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "A" "B" "C"
+\end{verbatim}
+
+Each component of a list can be extracted using the \texttt{\$} symbol
+followed by that component's name. For example, to access component A
+from list \texttt{lst}, type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my.lst}\SpecialCharTok{$}\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       x    y
+## 1   7.3  5.2
+## 2  29.4 26.6
+## 3  29.4 31.2
+## 4   2.9  2.2
+## 5  12.3 13.8
+## 6   7.5  7.8
+## 7  36.0 35.2
+## 8   4.8  8.6
+## 9  18.8 20.3
+## 10  4.2  1.1
+\end{verbatim}
+
+You can also access that same component using its numerical index. Since
+A is the first component in \texttt{lst}, its numerical index is
+\texttt{1}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my.lst[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       x    y
+## 1   7.3  5.2
+## 2  29.4 26.6
+## 3  29.4 31.2
+## 4   2.9  2.2
+## 5  12.3 13.8
+## 6   7.5  7.8
+## 7  36.0 35.2
+## 8   4.8  8.6
+## 9  18.8 20.3
+## 10  4.2  1.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(my.lst[[}\DecValTok{1}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+Note that components do not require names. For example, we could have
+created a list as follows (note the omission of \texttt{A=},
+\texttt{B=}, etc\ldots):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lst.notags }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(A, B, D)}
+\NormalTok{lst.notags}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+##       x    y
+## 1   7.3  5.2
+## 2  29.4 26.6
+## 3  29.4 31.2
+## 4   2.9  2.2
+## 5  12.3 13.8
+## 6   7.5  7.8
+## 7  36.0 35.2
+## 8   4.8  8.6
+## 9  18.8 20.3
+## 10  4.2  1.1
+## 
+## [[2]]
+## [1]  TRUE FALSE
+## 
+## [[3]]
+## function (expr, name) 
+## .External(C_doD, expr, name)
+## <bytecode: 0x000001c64aa22b20>
+## <environment: namespace:stats>
+\end{verbatim}
+
+When lists do not have component names, the \texttt{names} function will
+return NULL.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(lst.notags)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+You'll find that many functions in R return list objects such as the
+linear regression model function \texttt{lm}. For example, when we run a
+regression analysis for vector elements \texttt{x} and \texttt{y} (in
+data frame \texttt{A}) and save the output of the regression analysis to
+an object called M:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{( y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, A)}
+\FunctionTok{str}\NormalTok{(M)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 12
+##  $ coefficients : Named num [1:2] 0.0779 0.991
+##   ..- attr(*, "names")= chr [1:2] "(Intercept)" "x"
+##  $ residuals    : Named num [1:10] -2.112 -2.612 1.988 -0.752 1.533 ...
+##   ..- attr(*, "names")= chr [1:10] "1" "2" "3" "4" ...
+##  $ effects      : Named num [1:10] -48.07 -36.54 3.13 -0.66 2 ...
+##   ..- attr(*, "names")= chr [1:10] "(Intercept)" "x" "" "" ...
+##  $ rank         : int 2
+##  $ fitted.values: Named num [1:10] 7.31 29.21 29.21 2.95 12.27 ...
+##   ..- attr(*, "names")= chr [1:10] "1" "2" "3" "4" ...
+##  $ assign       : int [1:2] 0 1
+##  $ qr           :List of 5
+##   ..$ qr   : num [1:10, 1:2] -3.162 0.316 0.316 0.316 0.316 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:10] "1" "2" "3" "4" ...
+##   .. .. ..$ : chr [1:2] "(Intercept)" "x"
+##   .. ..- attr(*, "assign")= int [1:2] 0 1
+##   ..$ qraux: num [1:2] 1.32 1.44
+##   ..$ pivot: int [1:2] 1 2
+##   ..$ tol  : num 1e-07
+##   ..$ rank : int 2
+##   ..- attr(*, "class")= chr "qr"
+##  $ df.residual  : int 8
+##  $ xlevels      : Named list()
+##  $ call         : language lm(formula = y ~ x, data = A)
+##  $ terms        :Classes 'terms', 'formula'  language y ~ x
+##   .. ..- attr(*, "variables")= language list(y, x)
+##   .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+##   .. .. ..- attr(*, "dimnames")=List of 2
+##   .. .. .. ..$ : chr [1:2] "y" "x"
+##   .. .. .. ..$ : chr "x"
+##   .. ..- attr(*, "term.labels")= chr "x"
+##   .. ..- attr(*, "order")= int 1
+##   .. ..- attr(*, "intercept")= int 1
+##   .. ..- attr(*, "response")= int 1
+##   .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+##   .. ..- attr(*, "predvars")= language list(y, x)
+##   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+##   .. .. ..- attr(*, "names")= chr [1:2] "y" "x"
+##  $ model        :'data.frame':   10 obs. of  2 variables:
+##   ..$ y: num [1:10] 5.2 26.6 31.2 2.2 13.8 7.8 35.2 8.6 20.3 1.1
+##   ..$ x: num [1:10] 7.3 29.4 29.4 2.9 12.3 7.5 36 4.8 18.8 4.2
+##   ..- attr(*, "terms")=Classes 'terms', 'formula'  language y ~ x
+##   .. .. ..- attr(*, "variables")= language list(y, x)
+##   .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+##   .. .. .. ..- attr(*, "dimnames")=List of 2
+##   .. .. .. .. ..$ : chr [1:2] "y" "x"
+##   .. .. .. .. ..$ : chr "x"
+##   .. .. ..- attr(*, "term.labels")= chr "x"
+##   .. .. ..- attr(*, "order")= int 1
+##   .. .. ..- attr(*, "intercept")= int 1
+##   .. .. ..- attr(*, "response")= int 1
+##   .. .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+##   .. .. ..- attr(*, "predvars")= language list(y, x)
+##   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+##   .. .. .. ..- attr(*, "names")= chr [1:2] "y" "x"
+##  - attr(*, "class")= chr "lm"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(M)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "coefficients"  "residuals"     "effects"       "rank"         
+##  [5] "fitted.values" "assign"        "qr"            "df.residual"  
+##  [9] "xlevels"       "call"          "terms"         "model"
+\end{verbatim}
+
+The \texttt{M} list is more complex than the simple list \texttt{lst}
+created earlier. In addition to having more components, it stores a
+\emph{wider} range of data types and structures. For example, element
+\texttt{qr} is itself a list of five elements!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(M}\SpecialCharTok{$}\NormalTok{qr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 5
+##  $ qr   : num [1:10, 1:2] -3.162 0.316 0.316 0.316 0.316 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:10] "1" "2" "3" "4" ...
+##   .. ..$ : chr [1:2] "(Intercept)" "x"
+##   ..- attr(*, "assign")= int [1:2] 0 1
+##  $ qraux: num [1:2] 1.32 1.44
+##  $ pivot: int [1:2] 1 2
+##  $ tol  : num 1e-07
+##  $ rank : int 2
+##  - attr(*, "class")= chr "qr"
+\end{verbatim}
+
+So if we want to access the element rank in the component \texttt{qr} of
+list \texttt{M}, we can use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M}\SpecialCharTok{$}\NormalTok{qr}\SpecialCharTok{$}\NormalTok{rank}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+This structure of output from a function is common. Using \texttt{lm} it
+is specified in the help of the function (\texttt{?lm}): \emph{``object
+of class''lm'' is a \textbf{list} containing at least the following
+components''}
+
+\hypertarget{coercing-data}{%
+\section{Coercing data}\label{coercing-data}}
+
+Data can be coerced (forced, \textasciitilde{} converted) from one type
+to another. For example, to coerce the following vector object from
+character to numeric, use the \texttt{as.numeric} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y   }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"23.8"}\NormalTok{, }\StringTok{"6"}\NormalTok{, }\StringTok{"100.01"}\NormalTok{,}\StringTok{"6"}\NormalTok{)}
+\NormalTok{y.c }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(y)}
+\NormalTok{y.c}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  23.80   6.00 100.01   6.00
+\end{verbatim}
+
+The \texttt{as.numeric} function forces the vector to a double (you
+could have also used the \texttt{as.double} function). If you convert
+\texttt{y} to an integer, R will remove all fractional parts of the
+number.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.integer}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  23   6 100   6
+\end{verbatim}
+
+To convert a number to a character use \texttt{as.character}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numchar }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(y.c)}
+\NormalTok{numchar}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "23.8"   "6"      "100.01" "6"
+\end{verbatim}
+
+You can also coerce a number or a character into a factor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numfac }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(y)}
+\NormalTok{numfac}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 23.8   6      100.01 6     
+## Levels: 100.01 23.8 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{charfac }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(y.c)}
+\NormalTok{charfac}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 23.8   6      100.01 6     
+## Levels: 6 23.8 100.01
+\end{verbatim}
+
+There are many other coercion functions in R, a summary of some the most
+common ones we'll be using in this course and others:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{as.numeric  }\CommentTok{\# Coerce to numeric}
+\NormalTok{as.double   }\CommentTok{\# Coerce to double}
+\NormalTok{as.integer  }\CommentTok{\# Coerce to integer}
+\NormalTok{as.character }\CommentTok{\#  Coerce to character}
+\NormalTok{as.logical  }\CommentTok{\# Coerce to Boolean (logical: TRUE | FALSE)}
+\NormalTok{as.factor   }\CommentTok{\# Coerce to factor}
+\NormalTok{as.Date  }\CommentTok{\# Coerce to date}
+\NormalTok{as.data.frame  }\CommentTok{\# Coerce to data frame}
+\NormalTok{as.list }\CommentTok{\# Coerce to list}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{⚠ Practice 3.2} Create the following data frame from scratch.
+This short experiment aims at testing the efficiency of a diet made of
+bubble teas: three cups a day for a week. Weight of subjects is provided
+before and after this `bubble tea' diet (\textbf{the data are fake}).
+Reformat this data frame to obtain the \texttt{weight} as a
+\textbf{double} into one column and the \texttt{time} of measurement as
+a factor with two levels \texttt{before\_diet} and \texttt{after\_diet}.
+You will store this \textbf{data frame} as the first element of a list
+called \textbf{\texttt{BUBBLE\_DIET}}. The second element of this list
+will be another list called \textbf{\texttt{WEIGHT\_LOSS}}, storing
+three elements: {[}1{]} a \textbf{vector of character} extracting the
+row names of the table previously created; {[}2{]} a \textbf{numeric
+vector} (double) indicating the weight loss (in \%) of each subject (can
+be positive or negative); {[}3{]} a combination of these two elements in
+a \textbf{table with two columns}: \texttt{subject} and
+\texttt{weight\_loss}. The third element of the list
+\textbf{\texttt{BUBBLE\_DIET}} will be any message saying how much you
+enjoy manipulating data in R.You will push both your \emph{.Rmd} and
+\emph{.html} files into a public repository available from your Github
+account.You will share with me be email
+{[}\href{mailto:vianneydenis@g.ntu.edu.tw}{\nolinkurl{vianneydenis@g.ntu.edu.tw}}{]}
+the address (URL) of this repository (such as
+\url{https://github.com/vianneydenis/OCEAN5098.git}) \textbf{before next
+Monday} in order for me to check your work. The \textbf{title of your
+email } should be `Practice 3.2 (your name: your student no.). ENJOY ;)
+
+\includegraphics{images/table_manip.png}
+
+\end{document}

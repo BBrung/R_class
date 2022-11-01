@@ -23,7 +23,10 @@ library(readxl)
 
 #Read data from Florida
 data <- read_xlsx('Data/diving_site.xlsx')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6e1fe7f51fb0aa8f1cd6bfba580d8ad550a8ab65
 #data sources: https://www.scubadiversworld.com/sites.html
 
 #Make icon to mark my house: diver icon

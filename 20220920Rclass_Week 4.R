@@ -232,7 +232,7 @@ str(BUBBLE_DIET)
 #521.1314
 love.you.forever <- function(x){
   ((x+52.8)*5-3.4343)*2-10*x}
-love.you.forever(10)
+love.you.forever(5)
 
 #Love curve
 dat<- data.frame(t=seq(0, 2*pi, by=0.1) )
