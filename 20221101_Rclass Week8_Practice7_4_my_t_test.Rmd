@@ -1,0 +1,164 @@
+---
+title: "Practice7.4_my.t.test"
+author: "Chia-Jung Tsai"
+date: "2022-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# My t test (two sample t test)
+
+
+### First of all, here are some assumptions of t test. Before you use this function, please make sure the observations of your sample obey these rules.
+1. Independence: The observations in one sample are independent of the observations in the other sample.
+2. Random Sampling: Both samples were obtained using a random sampling method.
+3. Normality: Both samples are approximately normally distributed.
+4. Homogeneity of Variances: Both samples have approximately the same variance. 
+
+Here's some functions for you to test your data whether it follows the assumption of t test.
+
+### Normality test
+To test whether the distribution of your data is drawn from a normally distributed population
+<br /> If the test is non-significant (p-value > 0.05) 
+<br /> => the distribution of population is a normal distribution. (We use samples to represent population.)
+
+```{r}
+#data <- #put your data here
+#shapiro.test(data)
+#p-value <- shapiro.test(data)$'p.value'
+#p-value
+```
+
+### Test homogeneity of variances
+Null hypothesis is that all population variances are equal 
+<br /> If p-values < 0.05 
+<br /> => variances are significantly different, that is the homogeneity of variances is not equal
+
+```{r}
+#if data is normality - F test
+#var.test <- var.test(value ~ group, data = data) #if p-value > 0.05 => two groups are equal
+#var.test$'p.value'
+
+#if data is non-normality - Levene’s test
+#levene.test <- car::leveneTest(value ~ group, data = data)
+#levene.test$'p.value'
+
+#if variances are not equal (or you have small sample size)
+#welch.t.test -> set nor.mal = TRUE, homo.var = FALSE in function my.t.test
+```
+
+
+
+### Hypothesis of t test (two sample t test)
+H0: μx = μy (non-significantly different)
+<br /> H1: μx ≠ μy (significantly different)
+
+
+
+## My function: t test
+α = 0.05
+```{r}
+my.t.test <- function(x1, x2, nor.mal = TRUE, homo.var = TRUE){
+  if (nor.mal == TRUE & homo.var == TRUE){  #Student's t test
+    t <- (mean(x1)-mean(x2))/sqrt((sum((x1 - mean(x1))^2)/(length(x1)-1)) + (sum((x2 - mean(x2))^2)/(length(x2)-1)))
+    df <- length(x1) + length(x2) - 2
+    t.dtb <- pt(abs(t), df, lower.tail = FALSE, log.p = FALSE) #two tailed t test
+    cri.num0.95 <- qt(0.025, df, lower.tail = TRUE, log.p = FALSE) #critical number of conf.Interval at 0.95
+    if (abs(t) <= cri.num0.95){
+      list(Test = 'Student`s t test',
+                 Discription = paste('Discription: two samples are `not` significantly different'),
+                 p.value =  paste('p.value =', 2*t.dtb),
+                 degree.of.freedom = paste('degree.of.freedom = ', df),
+                 confidence.interval = paste('confidence.interval = 95%'))
+      }else{
+        list(Test = 'Student`s t test',
+                   Discription = paste('Discription: two samples are significantly different'),
+                   p.value =  paste('p.value =', 2*t.dtb),
+                   degree.of.freedom = paste('degree.of.freedom = ', df),
+                   confidence.interval = paste('confidence.interval = 95%'))}
+  }else if (nor.mal == TRUE & homo.var == FALSE){  # Welch's  t test
+    wt <- (mean(x1)-mean(x2))/sqrt(((sd(x1)^2)/length(x1))+((sd(x2)^2)/length(x2)))
+    df <- length(x1) + length(x2) - 2
+    wt.dtb <- pt(abs(wt), df, lower.tail = FALSE, log.p = FALSE) #two tailed t test
+    cri.num0.95 <- qt(0.025, df, lower.tail = TRUE, log.p = FALSE) #critical number of conf.Interval at 0.95
+    if (abs(wt) <= cri.num0.95){
+      list(Test = 'Welch`s t test',
+                 Discription = paste('Discription: two samples are `not` significantly different'),
+                 p.value =  paste('p.value =', 2*wt.dtb),
+                 degree.of.freedom = paste('degree.of.freedom = ', df),
+                 confidence.interval = paste('confidence.interval = 95%'))
+    }else{
+      list(Test = 'Welch`s t test',
+                 Discription = paste('Discription: two samples are significantly different'),
+                 p.value =  paste('p.value =', 2*wt.dtb),
+                 degree.of.freedom = paste('degree.of.freedom = ', df),
+                 confidence.interval = paste('confidence.interval = 95%'))}
+  }else{
+    print('Your data did not follow normal distribution. Suggestion for you: wilcox.test() -> non-parametric test')
+  }
+}
+```
+
+
+
+
+## Let's carry out the function with your data
+
+### Dataset: rairuoho
+```{r}
+#read the file
+rairuoho <- read.delim(url('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt'))
+```
+
+### Draw a boxplot to visualize the data of rairuoho
+```{r}
+library(ggplot2)
+#plot theme written by someone
+theme_USGS_box <- function(base_family = "serif", ...){
+  theme_bw(base_family = base_family, ...) +
+    theme(
+      panel.grid = element_blank(),
+      plot.title = element_text(size = 8),
+      axis.ticks.length = unit(-0.05, "in"),
+      axis.text.y = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
+      axis.text.x = element_text(margin=unit(c(0.3,0.3,0.3,0.3), "cm")),
+      axis.ticks.x = element_blank(),
+      aspect.ratio = 1,
+      legend.background = element_rect(color = "black", fill = "white")
+    )
+}
+library(tidyverse)
+new.rairuoho <- pivot_longer(rairuoho, names_to = 'day', values_to = 'length', cols = 1:6)
+new.rairuoho.plot <- ggplot(new.rairuoho, aes(x = day, y = length, fill = treatment)) + 
+  geom_boxplot()+
+  theme_USGS_box() +
+  xlab('Day') +
+  ylab('Length') +
+  scale_fill_discrete(name = 'Treatment') +
+  theme(legend.position = c(0.175, 0.83))
+new.rairuoho.plot
+
+```
+
+
+## Test the effect of treatment on length at various days in the rairuoho dataset by my t test
+```{r}
+outcome <- NULL
+for (i in 1:6){
+  outcome[[i]] <- list(Day = paste('day', i+2), 
+                       my.t.test = my.t.test(filter(rairuoho, treatment == 'water')[,i],
+                                             filter(rairuoho, treatment == 'nutrient')[,i],
+                                             homo.var = F)) # I assume that the population data of rairuoho follows normal distribution.
+}
+outcome
+```
+
+
+## Summary
+From the outcome, we can observe that:
+<br /> Non-significantly different: Day3, Day4, Day5, Day6
+<br /> Significantly different: Day7, Day8
+<br /> We can also see this pattern from boxplot.
