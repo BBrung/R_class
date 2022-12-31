@@ -1,0 +1,288 @@
+---
+title: "R class final report"
+author: "R11241203 Berrica  &  R11241206  Leonie"
+date: "2022-12-30"
+output: html_document
+fontsize: 22pt
+---
+Data set:
+Systematic global assessment of reef fish communities by the Reef Life Survey program.
+
+## **Introduction**
+* This report uses worldwide data collected by volunteer (or ‘citizen’) scientists and professional biologists under the Reef Life Survey (RLS) program to make up for the disadvantage of the past studies about limited collection of broad-scale quantitative biodiversity datasets.
+* The program started in 2007 and the surveys around Australia are more complete. Thus, we use those data around Australia from 2008 to 2013.
+* In our opinion, reef fish abundance might be impacted by three factors that we can find in this data set. They are latitude, depth, and season.
+* With this global data set about reef fish communities, we have three hypotheses:
+  1)	From low latitude to high latitude, reef fish abundance will gradually decrease in each region.
+  2)	Reef fish abundance will alter along the depth gradient in each region.
+  3)	Reef fish abundance will have seasonal changes influenced by primary production that change along the different seasons.
+
+
+
+## **Methodology**
+### **A. Survey methods**  
+The method of surveys is an underwater visual census (UVC) by SCUBA divers along a depth contour on hard substrate through a 50m transect. Divers swim along the transect and record all fish species observed within 5m of the transect on a waterproof datasheet.
+	
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```	
+
+
+```{r, warning=FALSE}
+#Load data from IMOS-National Reef Monitoring Network Sub-Facility
+library(tidyverse)
+reef.fish <- read.csv('RLSreeffishdataset.csv')
+reef.fish.Aus <- reef.fish %>% filter(Country == 'Australia')
+```
+
+```{r, warning=FALSE}
+#Subset data
+library(plotrix) #package to count error bar
+reef.fish.Aus.se <- reef.fish.Aus  %>% group_by(Ecoregion) %>% summarise(std.er = std.error(Total)) #count error bar
+reef.fish.Aus.lat <- reef.fish.Aus %>% group_by(Ecoregion) %>% summarise(meanlat = mean(SiteLat), meanlong = mean(SiteLong))
+reef.fish.Aus.re <- reef.fish.Aus %>% group_by(Ecoregion) %>% summarise(mean = mean(Total)) %>% 
+  left_join(., reef.fish.Aus.lat, by = 'Ecoregion') %>% arrange(., desc(meanlat)) #arrange from low latitude to high 
+reef.fish.Aus.re$Ecoregion <- factor(reef.fish.Aus.re$Ecoregion, levels = unique(reef.fish.Aus.re$Ecoregion))
+```
+**Sample regions**
+```{r, fig.width = 11, fig.height = 9, warning=FALSE, echo=FALSE}
+#Map----
+library(maptools)
+library(viridis) 
+data("wrld_simpl")
+points <- reef.fish.Aus.re[c('Ecoregion','meanlong','meanlat')]
+plot(wrld_simpl, xlim = c(110, 160), ylim = c(-50, 0), col = 'lightgreen', bg = 'lightblue')
+coords <- reef.fish.Aus.re[c('meanlong','meanlat')]
+coords.sp <- coordinates(coords)
+point.sp <- SpatialPoints(coords.sp)
+region <- data.frame(ecoregion = reef.fish.Aus.re$Ecoregion)
+pointre.sp <- SpatialPointsDataFrame(point.sp, region)
+plot(pointre.sp, add = T, col = viridis(n = 18, option = 'plasma', direction = -1), pch = 19, cex = 1)
+text(x = points$meanlong, y = points$meanlat, labels = points$Ecoregion)
+
+```
+
+### **B. Data analyses**
+First of all, we use Shapiro test to test normality of the dataset. Next, we use Kruskal test to see the significant difference between each group abundance in Ecoregion, Depth, and Month. Lastly, we use pairwise Wilcox test to see the differentiation of group abundance. The final results are presented in the bar plots.
+
+**Latitudinal effect**  
+	We check the variation of reef fish abundance along latitude and divided them into two parts– western Australia and eastern Australia. Because reefs are normally better developed in the western ocean (Kinsey and Davies 1979, Wellington and Glynn 1983), we assume that reef fish abundance will increase with the reef-developed level.
+
+**Bathymetric effect**  
+	In correlation between reef fish abundance and the depth gradient, we define sample depths above 10m as ‘shallow’ and other sample depths below 20m as ‘deep’. Reef fish abundance will alter along the depth gradient by altering light, salinity, temperature, and so on. Thus, we want to check the trend of altering reef fish abundance through depth.
+
+**Seasonal effect**  
+	Seasonal changes can usually be observed in many biological processes so we assume that reef fish abundance will also be influenced. To see the impact, we analyzed the correlation between reef fish abundance and the season.
+
+
+## **Results**
+
+#### **Latitudinal effect**
+We do not see any pattern in reef fish abundance with the latitudinal gradient. In all locations in Australia, there are significant between some sites but we can not find a trend through the latitude. In addition, we grouped the samples by location, respectively in western Australia and eastern Australia. However, there is no trend to show differentiation in reef fish abundance through the latitudinal gradient in western or eastern Australia.
+```{r, fig.width = 10, fig.height = 8, warning=FALSE}
+# Overall data-Latitudinal----
+library(ggplot2)
+library(RColorBrewer)
+ggplot(reef.fish.Aus.re, aes(x = Ecoregion, y = mean))+
+  geom_bar(stat = "identity", aes(fill = Ecoregion))+
+  geom_errorbar(aes(x = Ecoregion, 
+                    ymin = mean-reef.fish.Aus.se$std.er , 
+                    ymax = mean+reef.fish.Aus.se$std.er), 
+                width=.1)+
+  theme_light()+
+  theme(axis.text.x = element_text(angle=70, hjust=1, vjust=1))+
+  labs(x = 'Site (from low latitude to high latitude)', y = 'Average abundance')+
+  scale_fill_viridis(discrete = T, option = 'plasma',direction = -1)
+```
+**East**
+```{r, fig.width = 10, fig.height = 8, warning=FALSE}
+#West and East----
+#Latitude
+reef.fish.Aus.re.W_E <- reef.fish.Aus.re %>% data.frame(Side = rep('East',18))
+reef.fish.Aus.re.W_E$Side[c(1,3,7,8,9,11,13)] <- rep('West',7)
+reef.fish.Aus.re.W_E <- reef.fish.Aus.re.W_E %>% group_by(Side) %>% arrange(., desc(meanlat), .by_group = T)
+reef.fish.Aus.re.W_E <- full_join(reef.fish.Aus.re.W_E, reef.fish.Aus.se, by = 'Ecoregion')
+reef.fish.Aus.re.W_E$Ecoregion <- factor(reef.fish.Aus.re.W_E$Ecoregion, levels = unique(reef.fish.Aus.re.W_E$Ecoregion))
+
+reef.fish.Aus.re.E <- reef.fish.Aus.re.W_E %>% filter(Side == 'East')
+
+
+#plot only for east
+ggplot(reef.fish.Aus.re.E, aes(x = Ecoregion, y = mean))+
+  geom_bar(stat = "identity", aes(fill = Ecoregion))+
+  geom_errorbar(aes(x = Ecoregion, 
+                    ymin = mean-std.er , 
+                    ymax = mean+std.er), 
+                width=.1)+
+  theme_light()+
+  theme(axis.text.x = element_text(angle=70, hjust=1, vjust=1))+
+  labs(x = 'Site (from low latitude to high latitude)', y = 'Average abundance')+
+  scale_fill_viridis(discrete = T, option = 'plasma',direction = -1)
+```
+
+
+**West**
+```{r, fig.width = 10, fig.height = 8, warning=FALSE}
+
+reef.fish.Aus.re.W <- reef.fish.Aus.re.W_E %>% filter(Side == 'West') 
+#plot only for west
+ggplot(reef.fish.Aus.re.W, aes(x = Ecoregion, y = mean))+
+  geom_bar(stat = "identity", aes(fill = Ecoregion))+
+  geom_errorbar(aes(x = Ecoregion, 
+                    ymin = mean-std.er , 
+                    ymax = mean+std.er), 
+                width=.1)+
+  theme_light()+
+  theme(axis.text.x = element_text(angle=70, hjust=1, vjust=1))+
+  labs(x = 'Site (from low latitude to high latitude)', y = 'Average abundance')+
+  scale_fill_viridis(discrete = T, option = 'plasma',direction = -1)
+
+```
+
+
+```{r, warning=FALSE}
+#Data analysis
+###Latitudinal variation----
+
+#Shapiro
+
+#sample size more than 5000
+qqnorm(reef.fish.Aus$Total)
+qqline(reef.fish.Aus$Total)
+#=> Not a normal distribution
+
+#kruskal.test
+#One-way non-parametric analysis
+kruskal.test(Total ~ Ecoregion, data = reef.fish.Aus)
+#Kruskal-Wallis chi-squared = 602.08, df = 17, p-value < 2.2e-16 => There are significant differences
+
+#post-hoc tests
+pairwise.wilcox.test(reef.fish.Aus$Total, reef.fish.Aus$Ecoregion,
+                     p.adjust.method = "BH") #=> They are not the same, see barplot
+
+
+
+```
+
+
+#### **Bathymetric effect**   
+Reef fish abundance represents the differentiation in shallow water in different sites. To see the effect through the depth gradient, we only have six sites with both shallow and deep data (Bassian, Cape Howe, Leeuwin, Manning-Hawkesbury, Lord Howe and Norfolk Islands, and Houtman). In these six locations, reef fish abundance seem different but non‑significant differentiation between shallow and deep depth. However, reef fish abundance tends to increase at four locations (Cape Howe, Leeuwin, Manning-Hawkesbury, and Lord Howe and Norfolk Islands) and decrease at two locations (Bassian and Houtman).
+```{r, fig.width = 10, fig.height = 8, warning=FALSE}
+#Data analysis
+#shallow(<=10) and deep(>=20) water----
+reef.fish.Aus.dep <- reef.fish.Aus %>% filter(reef.fish.Aus$Depth <= 10 | reef.fish.Aus$Depth>= 20) %>% 
+  mutate(water = ifelse(Depth <= 10,'shallow', 'deep'))
+reef.fish.Aus.dep.se <-  reef.fish.Aus.dep %>% group_by(Ecoregion, water) %>% summarise(std.er = std.error(Total)) #count error bar
+reef.fish.Aus.dep.lat <- reef.fish.Aus.dep %>% group_by(Ecoregion, water) %>% summarise(meanlat = mean(SiteLat), meanlong = mean(SiteLong))
+
+reef.fish.Aus.dep.re <- reef.fish.Aus.dep %>% group_by(Ecoregion, water) %>% summarise(mean = mean(Total)) %>% 
+  left_join(., reef.fish.Aus.dep.lat, by = c('Ecoregion','water')) %>% arrange(., desc(meanlat)) #arrange from low latitude to high 
+reef.fish.Aus.dep.re$Ecoregion <- factor(reef.fish.Aus.dep.re$Ecoregion, levels = unique(reef.fish.Aus.dep.re$Ecoregion))
+reef.fish.Aus.dep.re$water <- factor(reef.fish.Aus.dep.re$water, levels = unique(reef.fish.Aus.dep.re$water))
+
+#plot
+ggplot(reef.fish.Aus.dep.re, aes(x = Ecoregion, y = mean))+
+  geom_bar(stat = "identity", aes(fill = Ecoregion))+
+  geom_errorbar(aes(x = Ecoregion, 
+                    ymin = mean-reef.fish.Aus.dep.se$std.er , 
+                    ymax = mean+reef.fish.Aus.dep.se$std.er), 
+                width=.1)+
+  theme_light()+
+  theme(axis.text.x = element_text(angle=70, hjust=1, vjust=1))+
+  labs(x = 'Site (from low latitude to high latitude)', y = 'Average abundance')+
+  scale_fill_viridis(discrete = T, option = 'plasma',direction = -1)+
+  facet_grid(rows = vars(water))
+```
+
+
+```{r, warning=FALSE}
+##Subset those locations contain both shallow and deep samples
+bothS_D <- c('Houtman','Lord Howe and Norfolk Islands','Manning-Hawkesbury','Leeuwin','Cape Howe','Bassian')
+reef.fish.Aus.dep.bothS_D <- reef.fish.Aus.dep %>% filter(Ecoregion %in% bothS_D)
+reef.fish.Aus.dep.bothS_D <- reef.fish.Aus.dep.bothS_D %>% mutate(Eco_water = paste(Ecoregion, water)) %>% arrange(Ecoregion)
+reef.fish.Aus.dep.bothS_D$Eco_water <- factor(reef.fish.Aus.dep.bothS_D$Eco_water, 
+                                              levels = unique(reef.fish.Aus.dep.bothS_D$Eco_water))
+#Shapiro test
+#sample size more than 5000
+qqnorm(reef.fish.Aus.dep.bothS_D$Total)
+qqline(reef.fish.Aus.dep.bothS_D$Total)
+#=> Not a normal distribution
+
+#kruskal.test
+#One-way non-parametric analysis
+kruskal.test(Total ~ Eco_water, data = reef.fish.Aus.dep.bothS_D)
+#Kruskal-Wallis chi-squared = 198.81, df = 11, p-value < 2.2e-16 => There are significant differences
+
+#post-hoc tests
+pairwise.wilcox.test(reef.fish.Aus.dep.bothS_D$Total, reef.fish.Aus.dep.bothS_D$Eco_water,
+                     p.adjust.method = "BH") 
+```
+
+#### **Seasonal effect**  
+We combine all reef fish abundance together in Australia location and compare the difference in each month. There are significant differentiation between some months and have a trend to have a higher abundance from March to June. Overall, our data shows that there is a peak in reef fish abundance in spring and summer.
+```{r, fig.width = 7, fig.height = 5, warning=FALSE}
+#Separate by date(month)----
+reef.fish.Aus.dat <- reef.fish.Aus %>% mutate(Month = sapply(strsplit(reef.fish.Aus$SurveyDate,'-'), '[', 2)) #split the character of month
+
+reef.fish.Aus.dat.se <-  reef.fish.Aus.dat %>% group_by(Ecoregion, Month) %>% summarise(std.er = std.error(Total)) #count error bar
+reef.fish.Aus.dat.lat <- reef.fish.Aus.dat %>% group_by(Ecoregion, Month) %>% summarise(meanlat = mean(SiteLat), meanlong = mean(SiteLong))
+
+reef.fish.Aus.dat.re <- reef.fish.Aus.dat %>% group_by(Ecoregion, Month) %>% summarise(mean = mean(Total)) %>% 
+  left_join(., reef.fish.Aus.dat.lat, by = c('Ecoregion', 'Month')) %>% arrange(., desc(meanlat)) #arrange from low latitude to high 
+reef.fish.Aus.dat.re$Ecoregion <- factor(reef.fish.Aus.dat.re$Ecoregion, levels = unique(reef.fish.Aus.dat.re$Ecoregion))
+reef.fish.Aus.dat.re <- reef.fish.Aus.dat.re %>% 
+  mutate(Month = factor(Month, levels = month.abb)) %>% arrange(Month)
+reef.fish.Aus.dat <- reef.fish.Aus %>% mutate(Month = sapply(strsplit(reef.fish.Aus$SurveyDate,'-'), '[', 2)) #split the character of month
+reef.fish.Aus.dat.se.onM <-  reef.fish.Aus.dat %>% group_by(Month) %>% summarise(std.er = std.error(Total)) #count error bar
+reef.fish.Aus.dat.onM <- reef.fish.Aus.dat %>% group_by(Month) %>% summarise(mean = mean(Total))
+reef.fish.Aus.dat.onM <- reef.fish.Aus.dat.onM %>% 
+  mutate(Month = factor(Month, levels = month.abb)) %>% arrange(Month)
+
+ggplot(reef.fish.Aus.dat.onM, aes(x = Month, y = mean))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(x = Month, 
+                    ymin = mean-reef.fish.Aus.dat.se.onM$std.er , 
+                    ymax = mean+reef.fish.Aus.dat.se.onM$std.er), 
+                width=.1)+
+  theme_light()+
+  theme(axis.text.x = element_text(angle=70, hjust=1, vjust=1))+
+  labs(x = 'Month', y = 'Average abundance')+
+  scale_fill_viridis(discrete = T, option = 'plasma',direction = -1)
+
+```
+
+```{r, warning=FALSE}
+#Data analysis
+###Month variation----
+
+#Shapiro
+#sample size more than 5000
+qqnorm(reef.fish.Aus.dat$Total)
+qqline(reef.fish.Aus.dat$Total)
+#=> Not a normal distribution
+
+#kruskal.test
+#One-way non-parametric analysis
+kruskal.test(Total ~ Month, data = reef.fish.Aus.dat)
+#Kruskal-Wallis chi-squared = 346.34, df = 11, p-value < 2.2e-16 => There are significant differences
+
+
+#post-hoc tests
+reef.fish.Aus.dat.arranMon <- reef.fish.Aus.dat %>% 
+  mutate(Month = factor(Month, levels = month.abb)) %>% arrange(Month)
+
+pairwise.wilcox.test(reef.fish.Aus.dat.arranMon$Total, reef.fish.Aus.dat.arranMon$Month,
+                     p.adjust.method = "BH") #=> They are not the same, see barplot
+```
+
+
+## **Discussion and Conclusions**
+*	The data collected distribution of reef fish abundance is unequal in each site. It may according to the difficulty of the survey location and popular diving location appeal more diver to do survey. Above reason may lead to non‑significant results in different latitudes.
+
+*	The Reef Life Survey (RLS) program collected broad-scale quantitative biodiversity datasets. However, their collection has a lot of missing data. Six locations can not represent the pattern of changing reef fish abundance with depth gradient in Australia.
+
+*	Volunteer (or ‘citizen’) scientists were training to identify reef fish. Inevitably, they would prefer to observe some species of reef fish and would have different identifying ability. This will affect the accuracy and credibility of our analysis.
+
+*	The reef fish abundance altering pattern with three factors – Ecoregion, Depth, and Month – is unclear. We need more complete data and further analysis to support our hypotheses.
+
+
